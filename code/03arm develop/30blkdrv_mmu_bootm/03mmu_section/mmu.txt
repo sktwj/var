@@ -1,0 +1,65 @@
+参考arm手册(DDI0406A_arm_v7a_v7r_architecture_reference_manual.pdf)
+chapter B3 VMSA
+
+名词解释:
+mmu = memory managerment unit
+属于cpu内部的协处理器之一，所以它的配置使用CP15寄存器
+mva = modified virtual address，虚拟地址
+pa = physical address，物理地址
+TT = translation table， 页表
+TTB = translation table base address页表在内存中的首地址，需要写入c2寄存器，arm1176手册p189
+TLB = Translation Lookaside Buffers页表项的缓存，在cpu内部，缓存的是页表项的内容，也就是虚拟地址和物理地址的映射关系
+
+当mmu控制单元打开时，cpu只能看到虚拟地址mva，除了cpu以外的硬件，无法看到虚拟地址，所以还是以物理地址pa工作
+
+mmu的作用：
+1 限制低权限cpu模式（也就是特指user模式）的地址访问权限
+2 给cpu产生虚拟地址，形成cpu只能通过虚拟地址来访问物理地址，使得各个应用层进程可以获得独立的寻址空间，而不需要考虑地址被其他进程占用的问题（地址冲突），大大简化了应用程序的实现。这是现代操作系统最重要的实现前提
+3 管理cpu通过地址访问外部资源的缓冲策略
+
+
+
+段映射方式中，虚拟地址通过查询页表转换得到物理地址的全过程，translation table walk，见armv7手册p1256
+
+页表项中的access control fields权限控制和缓冲策略控制: P1248
+
+小页映射过程，P1258
+小页的页表项描述，P1250
+
+AP、XN、domain：访问权限控制
+AP: access permission手册p1267，按照权限设置来限制特权模式和低权限模式下的读写访问，仅在client domain时有效
+
+XN：excute never手册p1269, 设为1时，页表项映射的区域不能执行，0时可执行。仅在client domain时有效
+
+domain: 手册p1269，全局有16个domain，每个domain可以单独设置以下状态，16个domain在CP15的C3寄存器(cortex a8手册P140)中设置以下状态，页表项中可以选择16个domain中的一个
+设为00: 权限全关，AP和XN无效
+设为01: client时，AP和XN有效
+设为11: manager时，AP和XN无效，权限全开
+
+TEX、C、B：缓冲控制，手册P1272
+缓冲（指令缓冲icache和数据缓冲dcache）使用方式
+数据或指令在进入cpu运算执行前，先进入cache后再被cpu访问
+之后，当再次访问到相同地址的数据时，可以直接访问cache中的数据，而不需要重新读取内存。当cpu改变cache中的数据时，cache和内存数据就会不一致，此时cache和内存之间有以下两种同步方式
+write through：直接将buffer中的数据回写给内存，以保证完全的同步
+write back：暂时不将数据回写给内存，而是维持与内存的不同步，将数据标记为“脏”，然后继续被cpu访问，直到buffer中的数据已经不再被频繁访问而要剔除出buffer，此时数据再回写到内存中。相比write through方式，可以大幅减少内存的写入操作
+strongly order: 关闭cache（读缓冲）和buffer（写缓冲），并严格限制访问顺序
+Shareable Device： 开启cache，关闭buffer
+Outer and Inner Write-Back, no Write-Allocate: 读写缓冲都打开
+
+
+MMU所需CP15寄存器参考cotex a9标准手册P52
+寄存器列表见armv7手册P1311
+c1: 开关mmu，CP15总控寄存器，a8手册P124, control register
+c2: 设置页表首地址TTB，armv7手册P1251，cortex a8手册P136
+	TTBR0（a8手册P135）和TTBR1可分别设置两个页表，它们的切换源自TTBCR中的N位设置，基本上高位VA用TTBR1，低位VA用TTBR0。两者的切换原则见手册P1352
+	当TTBCR.N == 0(a8手册P139)，则始终使用TTBR0指向的页表，如果N > 0，则仅在MVA[31:32-N]为0时，才使用TTBR0的页表，其余使用TTBR1的页表
+c3: 设置domain，a8手册P140, client时，AP和XN有效，manager时，AP和XN无效
+//c8: 清空TLB, 手册P154
+
+CP15寄存器的操作指令为mcr（将通用寄存器数据写入到cp15寄存器中）和mrc（从cp15寄存器中读出数据到通用寄存器）
+指令原型
+mcr p15 CRn, <Rd>, Op1, CRm, Op2
+其中
+p15是固定参数
+CRn, Op1, CRm, Op2四个操作数决定了所操作的是哪个cp15寄存器
+Rd表示通用寄存器

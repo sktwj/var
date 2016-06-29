@@ -1,0 +1,8 @@
+
+1、参考manpage，实现函数memset, memcpy, memcmp, memmove的功能
+
+2、实现无头非循环的单向链表：
+	//要求是所有函数的struct node *node的参数全部改成elem_t data
+	具有头插建立链表、尾插建立链表、遍历链表、查找节点、删除节点、销毁链表的功能
+
+

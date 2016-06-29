@@ -1,0 +1,4 @@
+uphttpd.o: uphttpd.c server.h list.h
+up_conf.o: up_conf.c server.h list.h
+up_log.o: up_log.c server.h list.h up_log.h
+thread_pool.o: thread_pool.c

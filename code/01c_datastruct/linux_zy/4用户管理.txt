@@ -1,0 +1,24 @@
+
+用户和组练习：
+
+1.
+描述一下/etc/passwd 各段含义
+
+2.
+如何知道一个用户 username 所属于的组呢？   
+
+3.
+1).手动建立两个用户 oracle 和 webapp
+2).建立一个uplooking组,将这个组设置为 oracle 和 webapp 用户的附加组
+3).修改oracle的家目录为 /oracle ，修改webapp的家目录为 /webapp
+4).将oracle用户的登录shell改为csh，将webapp用户关闭掉，禁止他登陆
+5).将uplooking组，oracle，webapp全部删除
+
+4.
+创建test1 test2 test3 三个用户uid分别为801 802 803 并让他们的附属组是test组 (本机上无test用户组帐户) 。
+创建/tmp/test目录，该目录只有test1 test2 test3用户可读写；该目录下所有创建的文件，group将自动改变为test组，该目录下的文件只有owner可删
+
+5.
+授权用户jack和mary对目录/softdir有写权限，写出你的步骤
+
+

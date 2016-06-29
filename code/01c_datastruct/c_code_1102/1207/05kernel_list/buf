@@ -1,0 +1,7 @@
+/usr/include/_G_config.h:#define _G_BUFSIZ 8192
+/usr/include/ldap.h:#define	LDAP_OPT_X_SASL_MAXBUFSIZE		0x6109
+/usr/include/libdevmapper.h:#define DM_FORMAT_DEV_BUFSIZE	13	/* Minimum bufsize to handle worst case. */
+/usr/include/libio.h:#define _IO_BUFSIZ _G_BUFSIZ
+/usr/include/stdio.h:#ifndef BUFSIZ
+/usr/include/stdio.h:# define BUFSIZ _IO_BUFSIZ
+/usr/include/stdio.h:   Else make it use buffer BUF, of size BUFSIZ.  */

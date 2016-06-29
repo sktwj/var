@@ -1,0 +1,45 @@
+
+vim练习1:
+
+1.三种工作模式间的切换
+2.vi打开新文件
+输入如下内容：
+Read sendmail/README, especially:
+   a. the introduction
+   b. the BUILDING SENDMAIL
+   c. the relevant part(s) of the OPERATING SYSTEM AND COMPILE QUIRKS section
+3.保存文件，文件名：text1
+4.光标停在第三行BUILDING的首字母B上如何快速移动到下个单词SENDMAIL，如何快速移动到行尾
+5.  i  I  o  O   a  A都是什么含义
+6.翻页
+7.将SENDMAIL单词复制到文章的最后一行后
+8.将2至4行的内容保存到另一个文件/home/text2中
+9.保存退出text1和text2文件
+10.命令模式下 dd   d$  d^  dw 都是什么含义
+11.设置行号,取消行号
+12.查找大写S字母，查找并替换t为T
+13.撤销上一步的操作
+ 
+14.同时打开上面两个文件和/root/install.log文件，如何在这几个文件中切换
+15.在末行模式   :%s/bsdd/abc 和  :s/bsdd/abc/g有什么区别
+			  :s/bsdd/abc 和  :s/bsdd/abc/g有什么区别
+	上面的命令能将文件的内所有行的bsdd转换成abc吗？ 如何想替换全部，如何操作?
+16.如何想把文件的第8行 到第12行的BS111 转化成aaa如何操作？
+17.复制/etc/services文件中的100-120行到text2文件的末尾，并保存
+18.复制/etc/services文件到/root下
+19.打开/root/services文件，练习行的快速定位，从第1行去160行，再到455行，再回到第一行，再到文章尾
+
+
+vim练习2:
+
+请在 /root 这个目录下建立一个名为 vitest 的目录。
+进入 vitest 这个目录当中，将 /etc/man.config 拷贝到本目录下。
+打开本目录下的 man.config 这个文件。
+在其中取消和设置行号。 
+移动到第一行，并且向下搜寻一下teTeX 这个字符串，请问他在第几行？
+接着下来，我要将 50 到 100 行之间的 man 改为 MAN ，并且一个一个挑选是否需要修改，如何下达指令？
+修改完之后，突然反悔了，要全部复原，有哪些方法？ 
+我要复制 51 到 60 行这十行的内容，并且贴到最后一行之后
+删除 11 到 30 行之间的这 20 行
+将这个档案另存成一个 /tmp/man.test.config 的文件名
+

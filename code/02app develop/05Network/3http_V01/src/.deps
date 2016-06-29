@@ -1,0 +1,3 @@
+uphttpd.o: uphttpd.c server.h
+up_conf.o: up_conf.c server.h
+up_log.o: up_log.c

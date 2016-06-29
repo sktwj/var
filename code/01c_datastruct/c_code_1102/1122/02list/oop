@@ -1,0 +1,13 @@
+
+//把一个大象装进冰箱：
+
+面向过程：
+	1、打开冰箱门 open_gate
+	2、把大象放进去 put
+	3、把门关上 close_gate
+
+面向对象：
+	1、构造人类的对象lisi
+	2、lisi.open_gate
+	3、lisi.put
+	4、lisi.close_gate

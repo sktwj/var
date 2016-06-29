@@ -1,0 +1,25 @@
+obj-m := ldm.o
+$(obj-m:.o=)-objs := test.o
+
+#KERN_ROOT := ~/work/4412/linux/android/linux-3.5/
+KERN_ROOT := ~/work/4412/linux/linux-3.5/
+#KERN_ROOT := /lib/modules/`uname -r`/build/
+NFSROOT := ~/work/nfsroot/
+
+ccflags-y += -Wno-declaration-after-statement
+
+all: build
+
+build:
+	make M=`pwd` -C $(KERN_ROOT) modules
+	arm-linux-gcc fbapp.c
+
+mv:
+	mv $(obj-m:.o=.ko) $(NFSROOT)
+	mv a.out $(NFSROOT)
+
+clean:
+	make M=`pwd` -C $(KERN_ROOT) clean
+	$(RM) a.out
+
+.PHONY: all build mv clean
