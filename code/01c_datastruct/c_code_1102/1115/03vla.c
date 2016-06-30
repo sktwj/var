@@ -20,5 +20,10 @@ int main(void)
 		a[i] = i;
 	}
 
+    for (; i<n; i++)
+    {
+        printf("%d\n", a[i]); 
+    }
+
 	return 0;
 }
