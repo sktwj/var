@@ -6,12 +6,15 @@
 
 int test_endian(int *n)
 {
-	return  *((char *)(n)) == 0x44;
+    printf("%x\n", *((char *)n));
+    /*return  *((char *)(n)) == 0x44;*/
+	return  *((char *)(n)) == 1;
 }
 
 int main(void)
 {
-	int a = 0x11223344;
+    /*int a = 0x11223344;*/
+    int a = 1;
 	printf("%s\n", test_endian(&a) ? "little_endian" : "big_endian");
 
 	return 0;

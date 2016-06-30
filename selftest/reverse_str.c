@@ -44,6 +44,9 @@ int main(int argc, char *argv[])
         reverse(argv[1]);   
 
 }
+
+
+// hoh hoh test!
 #endif
 #if 0 
 char *str="汉字里有english也能正确显hehe";
