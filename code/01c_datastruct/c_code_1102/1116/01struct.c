@@ -5,7 +5,7 @@
 //2、最后一个成员负责整个结构体占据的内存空间能够被cpu字长整除
 
 //结构体：由不同或相同类型的成员组成的集合
-#pragma pack(1) 
+/*#pragma pack(1) */
 struct foo {
 	char c; //1+1
 	short b; //2
@@ -24,6 +24,13 @@ struct foo2 {
 
 int main(void)
 {
+    /*sizeof("hello") = 6*/
+    /*sizeof("hello" + 1) = 8*/
+    /*目前struct foo的默认对齐系数是：1*/
+    /*size foo = 19*/
+    /*目前struct foo2的默认对齐系数是：4*/
+    /*size foo2 = 8*/
+    printf("%ld\n", "o" +1);
 	printf("sizeof(\"hello\") = %d\n", sizeof("hello"));
 	printf("sizeof(\"hello\" + 1) = %d\n", sizeof("hello" + 1));
 
