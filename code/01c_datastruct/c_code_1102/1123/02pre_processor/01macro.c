@@ -38,9 +38,27 @@
 		#endif
 
 #endif
+	int max(int a, int b) {
+		return a > b ? a : b;
+	}
 
 int main(void)
 {
+    //
+    //M = 400
+    //MUL: 100
+    //macro, max = 4
+    //function, max = 4
+    //str, hello
+    //paste 1, 1000.000000
+    //paste 2, 13
+    //1::, B(123)
+    //3::, A(123)
+    //2::, "123"
+    //4::, "123"
+    //A(123) = 123
+    //
+    //
 	//1、定义无参宏（符号常量）：宏替换列表应该整体用()括起来
 	//在程序中符号常量经常出现的地方是数组的元素个数的位置。定义符号常量的好处是：1、为了程序维护起来更加方便，因为一般宏名都可以望名知义；2、可以起到一改全改的效果。像10这类不明其义的值尽量不要出现在程序中，通常我们称之为幻数。
 	#define M (10 + 10)
@@ -60,12 +78,8 @@ int main(void)
 		((a) > (b) ? (a) : (b))
 
 	//GUN C 对于传递有副作用的参数时，是能够正常处理的，但ANSI/ISO C 无法处理
-	#define GNU_MAX(a, b) \
-		({ int m = a, n = b; m > n ? m : n;})
+	//#define GNU_MAX(a, b) ({ int m = a, n = b; m > n ? m : n; })
 
-	int max(int a, int b) {
-		return a > b ? a : b;
-	}
 
 	int a = 3, b = 4;
 	printf("macro, max = %d\n", MAX(3, 4));

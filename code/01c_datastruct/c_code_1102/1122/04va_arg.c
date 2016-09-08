@@ -10,6 +10,7 @@ int sum(int m, int n, ...)
 
 	int sum = 0, ret;
 	while (ret = va_arg(ap, int)) { //每一次调用va_arg，可以取出一个可变参数
+        printf("sum%d += ret %d\n", sum ,ret);
 		sum += ret;
 	}
 
@@ -40,6 +41,13 @@ void foo_arg(int n, ...)
 
 int main(void)
 {
+    //sum = 15
+    //1, c
+    //hello world
+    //2, c
+    //hello world
+    //3.140000
+    //10
 	printf("sum = %d\n", sum(3,0, 1,2,3,4,5, 0));
 	
 	foo_arg(6, 'c', "hello world", 3.14, 10);

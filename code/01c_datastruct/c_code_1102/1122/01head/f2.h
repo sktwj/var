@@ -8,3 +8,4 @@
 void f2(void);
 
 #endif
+#pragma once

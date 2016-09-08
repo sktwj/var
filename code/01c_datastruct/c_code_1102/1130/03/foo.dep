@@ -1,0 +1,2 @@
+foo.o: foo.c \
+  /Users/xiaoxin/tavis/var/code/01c_datastruct/c_code_1102/1130/03/include/head.h

@@ -10,6 +10,22 @@ struct foo {
 
 int main(void)
 {
+    /*
+    arr[0] = 0
+    ff.s = world
+    f.p = hello
+    f2.p = hello
+    size f3 = 32
+    f5.p = hello
+    pf->s = world
+    ＝＝＝申请堆内存＝＝＝
+    1, pf->p = 0x7fe152c031d0
+    pf->p = linux
+    2, pf->p = 0x7fe152c031d0
+    realloc, pf->p = linuxkernel
+    ==free, pf->p = 0x0
+    free, pf->p = (null)
+    */
 	{
 	int a[3] = {0,1,};
 	//int aa[3];
@@ -39,7 +55,8 @@ int main(void)
 	printf("f2.p = %s\n", f2.p);
 
 	struct foo f3 = {10, "hello", };
-	printf("size f3 = %d\n", sizeof(f3));
+	printf("size f3 = %d\n", sizeof(f3.a));
+	printf("目前struct foo的默认对齐系数是：%d\n", __alignof__(struct foo));
 
 	struct foo f4;
 	//f4 = {10,"hello","world"}; //同14行
@@ -81,7 +98,8 @@ int main(void)
 	memcpy(pf->p, "linux", sizeof("linux"));
 	printf("pf->p = %s\n", pf->p);
 	pf->p = realloc(pf->p, 
-	(sizeof("linux") + sizeof("kernel") - 1));
+            (sizeof("linux") + sizeof("kernel") - 1));
+    /*(sizeof("linux") + sizeof("kernel") -10 ));*/
 	if (!pf->p) {
 		printf("realloc failed!\n");
 		free(pf->p);

@@ -29,9 +29,44 @@
 	//如果对于移植性有要求，请指针对无符号数进行右移操作
 
 #endif
+	int is_2_power(size_t n) 
+	{
+		if (n == 0) {
+			return 0;
+		}
+
+		return !(n & (n-1));
+	}
+	//不用第三个变量，交换两个变量的值
+	void _swap(int *a, int *b) //该方法，在*a+*b已经超出了int能够表示的最大范围时，结果是无法保证正确的。
+	{
+		*a = *a + *b; //7
+		*b = *a - *b; //7-4 = 3;
+		*a = *a - *b; //7-3 = 4
+	}
+
+	void swap(int *a, int *b)
+	{
+        /*
+		*a ^= *b;
+		*b ^= *a;
+		*a ^= *b;
+        */
+        *a = *a ^ *b;
+        *b = *a ^ *b;
+        *a = *a ^ *b;
+
+	}
 
 int main(void)
 {
+
+
+//and, a = 0x4
+//or, a = 0x14
+//m = 4, n = 3
+//abc = 0x78563412
+//6 不是
 	//不因平台而异，要表示一个全1的数据
 	unsigned int a = ~0;
 
@@ -47,22 +82,8 @@ int main(void)
 	a |= 1 << 4;
 	printf("or, a = %#x\n", a);
 
-	//不用第三个变量，交换两个变量的值
-	void _swap(int *a, int *b) //该方法，在*a+*b已经超出了int能够表示的最大范围时，结果是无法保证正确的。
-	{
-		*a = *a + *b; //7
-		*b = *a - *b; //7-4 = 3;
-		*a = *a - *b; //7-3 = 4
-	}
 
-	void swap(int *a, int *b)
-	{
-		*a ^= *b;
-		*b ^= *a;
-		*a ^= *b;
-	}
-
-	int m = 3, n = 4;
+	int m = 3, n = 6;
 	swap(&m, &n);
 	printf("m = %d, n = %d\n", m, n);
 
@@ -91,16 +112,8 @@ int main(void)
 	printf("abc = %#x\n", abc);
 
 	//判断一个数是否2的幂
-	int is_2_power(size_t n) 
-	{
-		if (n == 0) {
-			return 0;
-		}
 
-		return !(n & (n-1));
-	}
-
-	int num = 6;
+	int num = 8;
 	printf("%d %s是\n", 
 			num, is_2_power(num) ? "" : "不");
 

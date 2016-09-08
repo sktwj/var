@@ -24,16 +24,30 @@ void __swap(union u_endian *pu)
 	pu->s[1] = tmp;
 }
 
+
+union hehe{
+    int a;
+    short s;
+    char c;
+
+}
+
 int main(void)
 {
+//swap, ue = 0x33441122
+//size union = 4
+//u.a = 0x11223344
+//u.s = 0x3344
+//u.c = 0x44
+//u = 0x11223377
 	union u_endian ue = {0x11223344};
 	__swap(&ue);
 	printf("swap, ue = %#x\n", ue);
 
 	printf("size union = %d\n", sizeof(union u_foo));
-	printf("u.a = %#x\n", u.a);
-	printf("u.s = %#x\n", u.s);
-	printf("u.c = %#x\n", u.c);
+	printf("u.a = %#x %p\n", u.a, &u.a);
+	printf("u.s = %#x %p\n ", u.s, &u.s);
+	printf("u.c = %#x %p %#x\n", u.c, &u.c , *((char *)(&u.c+2)));
 
 	u.c = 0x77;
 	printf("u = %#x\n", u);

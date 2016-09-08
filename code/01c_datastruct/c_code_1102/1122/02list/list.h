@@ -21,5 +21,3 @@ struct list {
 };
 
 void list_init(struct list *); //构造函数，用来初始化链表对象的
-
-

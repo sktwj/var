@@ -11,6 +11,7 @@ static inline void callback1(void *n) //回调函数
 
 static inline void callback2(void *n) //回调函数
 {
+    printf("%d\n", n);
 	int sum = 0;
 	while ((int)(--n)) {
 		sum += (int)n;
@@ -21,7 +22,9 @@ static inline void callback2(void *n) //回调函数
 int main(void)
 {
 	do_it(callback1, "everyone");
-	do_it(callback2, (void *)3);
+	do_it(callback2, (void *)4);
+    /*printf("%p %d \n ", 3, 3);*/
+    /*printf("%p %d \n ", (void *)3, 3);*/
 
 	//callback1(); //此时的调用方式不能将callback1函数作为回调函数
 

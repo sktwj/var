@@ -8,6 +8,7 @@ static inline size_t hash_alg(const char *key)
 	size_t sum = 0;
 	while(*key) {
 		sum += *key++;
+        /*printf("sum %d\n", sum);*/
 	}
 
 	return sum % ARR_SIZE;
